@@ -5,7 +5,7 @@ st.set_page_config(page_title="Teste de Dimensões — Amazon", page_icon="📦"
 
 st.title("Teste de Dimensões — Amazon")
 st.write(
-    "Informe **três medidas** em cm (qualquer ordem)."
+    "Informe **três medidas** em cm."
 )
 
 # ---------- Entradas (iguais ao Gradio: três campos simples) ----------
