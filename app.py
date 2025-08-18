@@ -1,4 +1,4 @@
-# app.py — Streamlit simples (sem "ver cálculo")
+# app.py — Streamlit simples (sem "ver cálculo" e sem download na aba simples)
 import re
 import pandas as pd
 import streamlit as st
@@ -87,20 +87,6 @@ with tab1:
                 st.success(f"✅ Aceita — total {total:.2f}, maior lado {maior:.2f}")
             else:
                 st.error(f"❌ Não aceita — {res['motivo']}")
-
-            # Download (linha única)
-            df_one = pd.DataFrame([{
-                "Medida 1": m1, "Medida 2": m2, "Medida 3": m3,
-                "Comprimento (maior)": res["comprimento"], "Largura (2º)": res["largura"], "Altura (menor)": res["altura"],
-                "Total (cm)": res["total"], "Maior lado (cm)": res["maior_lado"],
-                "Resultado": res["status"], "Motivo": res["motivo"]
-            }])
-            st.download_button(
-                "Baixar resultado (CSV)",
-                df_one.to_csv(index=False).encode("utf-8"),
-                file_name="resultado_dimensoes.csv",
-                mime="text/csv"
-            )
 
         except Exception:
             st.error("Entrada inválida. Preencha as três medidas corretamente.")
