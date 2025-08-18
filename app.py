@@ -91,28 +91,3 @@ with tab1:
         except Exception:
             st.error("Entrada inválida. Preencha as três medidas corretamente.")
 
-# ---- Aba 2: CSV ----
-with tab2:
-    st.write("Envie um **CSV** com **3 colunas** (quaisquer nomes) correspondendo às três medidas.")
-    up = st.file_uploader("Arquivo CSV", type=["csv"])
-    sep = st.selectbox("Separador", [",", ";", "\t", "|"], index=0)
-    if up and st.button("Avaliar CSV", type="primary"):
-        try:
-            df_in = read_csv_cached(up, sep=sep)
-            st.caption("Prévia do arquivo")
-            st.dataframe(df_in.head())
-
-            cols = list(df_in.columns[:3])
-            st.caption(f"Usando colunas: {cols}")
-            df_out = evaluate_df(df_in, cols)
-            st.success("Avaliação concluída.")
-            st.dataframe(df_out)
-
-            st.download_button(
-                "Baixar resultados (CSV)",
-                df_out.to_csv(index=False).encode("utf-8"),
-                file_name="resultados_dimensoes.csv",
-                mime="text/csv"
-            )
-        except Exception as e:
-            st.error(f"Erro ao processar CSV: {e}")
