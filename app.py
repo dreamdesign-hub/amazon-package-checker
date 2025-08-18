@@ -78,8 +78,7 @@ def evaluate_df(df, cols):
 # ============ UI ============
 st.title("Teste de Dimensões — Amazon")
 st.write(
-    "Informe três medidas **em cm** (qualquer ordem). O app identifica o **maior** lado e calcula "
-    "`maior + 2 × (largura + altura)`. Regras: **total ≤ 432 cm** e **maior lado ≤ 180 cm**."
+    "Informe três medidas **em cm**."
 )
 
 tab1, tab2 = st.tabs(["Simples (3 medidas)", "CSV (opcional)"])
