@@ -37,13 +37,7 @@ if st.button("Verificar"):
         st.subheader("Resultado")
         st.write(resultado)
 
-        # (Opcional) Mostrar cálculo resumido — remova se não quiser
-        with st.expander("Ver cálculo (opcional)"):
-            st.write(
-                f"Ordenado (C × L × A): **{maior:.2f} × {meio:.2f} × {menor:.2f}** cm\n\n"
-                f"Cálculo: {maior:.2f} + 2 × ({meio:.2f} + {menor:.2f}) = **{total:.2f} cm**\n\n"
-                f"Regras: total ≤ 432 cm | maior lado ≤ 180 cm"
-            )
+    
 
     except Exception:
         st.error("Entrada inválida. Verifique os valores numéricos.")
