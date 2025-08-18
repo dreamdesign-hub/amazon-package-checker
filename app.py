@@ -36,8 +36,7 @@ def evaluate_three(m1, m2, m3):
 # ============ UI ============
 st.title("Teste de Dimensões — Amazon")
 st.write(
-    "Informe três medidas **em cm** (qualquer ordem). O app identifica o **maior** lado e calcula "
-    "`maior + 2 × (largura + altura)`. Regras: **Total ≤ 432 cm**\n\n**Maior lado ≤ 180 cm**\n\n**Peso bruto ≤ 45kg**."
+    "Informe três medidas **em cm** (qualquer ordem).\n\n Regras: \n\n**Total ≤ 432 cm**\n\n**Maior lado ≤ 180 cm**\n\n**Peso bruto ≤ 45kg**."
 )
 
 col1, col2, col3 = st.columns(3)
