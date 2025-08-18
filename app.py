@@ -1,6 +1,5 @@
-# app.py — Streamlit simples (sem "ver cálculo" e sem download na aba simples)
+# app.py — Streamlit somente modo simples (sem CSV, sem "ver cálculo")
 import re
-import pandas as pd
 import streamlit as st
 
 st.set_page_config(page_title="Teste de Dimensões — Amazon", page_icon="📦", layout="centered")
@@ -34,60 +33,30 @@ def evaluate_three(m1, m2, m3):
     r.update({"comprimento": maior, "largura": meio, "altura": menor})
     return r
 
-@st.cache_data(show_spinner=False)
-def read_csv_cached(file, sep):
-    return pd.read_csv(file, sep=sep)
-
-def evaluate_df(df, cols):
-    rows = []
-    for _, row in df.iterrows():
-        try:
-            maior, meio, menor = normalize_dims([row[cols[0]], row[cols[1]], row[cols[2]]])
-            r = evaluate_box(maior, meio, menor)
-            rows.append({
-                "Medida 1": row[cols[0]], "Medida 2": row[cols[1]], "Medida 3": row[cols[2]],
-                "Comprimento (maior)": maior, "Largura (2º)": meio, "Altura (menor)": menor,
-                "Total (cm)": r["total"], "Maior lado (cm)": r["maior_lado"],
-                "Resultado": r["status"], "Motivo": r["motivo"]
-            })
-        except Exception as e:
-            rows.append({
-                "Medida 1": row[cols[0]], "Medida 2": row[cols[1]], "Medida 3": row[cols[2]],
-                "Comprimento (maior)": None, "Largura (2º)": None, "Altura (menor)": None,
-                "Total (cm)": None, "Maior lado (cm)": None,
-                "Resultado": "Erro", "Motivo": str(e)
-            })
-    return pd.DataFrame(rows)
-
 # ============ UI ============
 st.title("Teste de Dimensões — Amazon")
 st.write(
     "Informe três medidas **em cm** (qualquer ordem). O app identifica o **maior** lado e calcula "
-    "`maior + 2 × (largura + altura)`. Regras: **total ≤ 432 cm** e **maior lado ≤ 180 cm**."
+    "`maior + 2 × (largura + altura)`. Regras: **Total ≤ 432 cm**\n\n**Maior lado ≤ 180 cm**\n\n**Peso bruto ≤ 45kg**."
 )
 
-tab1, tab2 = st.tabs(["Simples (3 medidas)", "CSV (opcional)"])
+col1, col2, col3 = st.columns(3)
+with col1:
+    m1 = st.text_input("Medida 1 (cm)", value="", placeholder="ex.: 120")
+with col2:
+    m2 = st.text_input("Medida 2 (cm)", value="", placeholder="ex.: 50")
+with col3:
+    m3 = st.text_input("Medida 3 (cm)", value="", placeholder="ex.: 40")
 
-# ---- Aba 1: Simples ----
-with tab1:
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        m1 = st.text_input("Medida 1 (cm)", value="", placeholder="ex.: 120")
-    with col2:
-        m2 = st.text_input("Medida 2 (cm)", value="", placeholder="ex.: 50")
-    with col3:
-        m3 = st.text_input("Medida 3 (cm)", value="", placeholder="ex.: 40")
+if st.button("Verificar", type="primary"):
+    try:
+        res = evaluate_three(m1, m2, m3)
+        maior, total = res["comprimento"], res["total"]
 
-    if st.button("Verificar", type="primary"):
-        try:
-            res = evaluate_three(m1, m2, m3)
-            maior, total = res["comprimento"], res["total"]
+        if res["status"] == "Aceita":
+            st.success(f"✅ Aceita — total {total:.2f}, maior lado {maior:.2f}")
+        else:
+            st.error(f"❌ Não aceita — {res['motivo']}")
 
-            if res["status"] == "Aceita":
-                st.success(f"✅ Aceita — total {total:.2f}, maior lado {maior:.2f}")
-            else:
-                st.error(f"❌ Não aceita — {res['motivo']}")
-
-        except Exception:
-            st.error("Entrada inválida. Preencha as três medidas corretamente.")
-
+    except Exception:
+        st.error("Entrada inválida. Preencha as três medidas corretamente.")
