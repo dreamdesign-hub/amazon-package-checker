@@ -1,4 +1,4 @@
-# app.py — Streamlit simples (Medida 1/2/3 + Resultado) com CSV opcional e download
+# app.py — Streamlit simples (entradas vazias com text_input) + CSV opcional e download
 import re
 import io
 import pandas as pd
@@ -11,7 +11,10 @@ def _to_float(s):
     """Converte string/num para float aceitando vírgula decimal e removendo milhar com ponto."""
     if s is None:
         raise ValueError("valor vazio")
-    s = str(s).strip().replace(",", ".")
+    s = str(s).strip()
+    if s == "":
+        raise ValueError("valor vazio")
+    s = s.replace(",", ".")
     # remove milhar com ponto quando seguido por 3 dígitos: 1.234,56 -> 1234.56
     s = re.sub(r"(?<=\d)\.(?=\d{3}(\D|$))", "", s)
     return float(s)
@@ -83,15 +86,15 @@ st.write(
 
 tab1, tab2 = st.tabs(["Simples (3 medidas)", "CSV (opcional)"])
 
-# ---- Aba 1: Simples ----
+# ---- Aba 1: Simples (entradas vazias com text_input) ----
 with tab1:
     col1, col2, col3 = st.columns(3)
     with col1:
-        m1 = st.number_input("Medida 1 (cm)", min_value=0.0, step=1.0, format="%.2f")
+        m1 = st.text_input("Medida 1 (cm)", value="", placeholder="ex.: 120 ou 120,5")
     with col2:
-        m2 = st.number_input("Medida 2 (cm)", min_value=0.0, step=1.0, format="%.2f")
+        m2 = st.text_input("Medida 2 (cm)", value="", placeholder="ex.: 50")
     with col3:
-        m3 = st.number_input("Medida 3 (cm)", min_value=0.0, step=1.0, format="%.2f")
+        m3 = st.text_input("Medida 3 (cm)", value="", placeholder="ex.: 40")
 
     if st.button("Verificar", type="primary"):
         try:
@@ -127,7 +130,7 @@ with tab1:
             )
 
         except Exception:
-            st.error("Entrada inválida. Verifique os valores.")
+            st.error("Entrada inválida. Preencha as três medidas corretamente (números, vírgula ou ponto para decimais).")
 
 # ---- Aba 2: CSV ----
 with tab2:
