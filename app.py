@@ -108,11 +108,7 @@ with tab1:
             else:
                 st.error(f"❌ Não aceita — {res['motivo']}")
 
-            with st.expander("Ver cálculo (opcional)"):
-                st.markdown(
-                    f"- Ordenado (C × L × A): **{maior:.2f} × {meio:.2f} × {menor:.2f}** cm\n"
-                    f"- Cálculo: `{maior:.2f} + 2 × ({meio:.2f} + {menor:.2f}) = {total:.2f} cm`\n"
-                    f"- Regras: total ≤ 432 cm | maior lado ≤ 180 cm"
+        
                 )
 
             # Download (linha única)
