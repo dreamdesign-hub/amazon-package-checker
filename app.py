@@ -2,7 +2,7 @@
 import re
 import streamlit as st
 
-st.set_page_config(page_title="Teste de Dimensões — Amazon & Correios", page_icon="📦", layout="centered")
+st.set_page_config(page_title="Teste de Dimensões", page_icon="📦", layout="centered")
 
 # ============ Utilitários ============
 def _to_float(s):
@@ -68,8 +68,7 @@ def evaluate_correios(a, b, c):
 st.title("Teste de Dimensões — Amazon & Correios")
 
 st.markdown(
-    "**Amazon**: informe 3 medidas em cm (qualquer ordem). O app identifica o maior lado e calcula "
-    "`maior + 2 × (largura + altura)`. Regras: **total ≤ 432** e **maior lado ≤ 180**."
+    "**Amazon**: informe 3 medidas em cm (qualquer ordem). \n\nRegras:\n\n * **Total ≤ 432**\n\n * **Maior lado ≤ 180**."
 )
 
 # ---- Seção 1: Amazon ----
@@ -97,7 +96,7 @@ st.markdown("---")
 # ---- Seção 2: Correios ----
 st.subheader("Correios")
 st.markdown(
-    "Regras: **cada lado ≤ 100 cm** e **soma (altura + largura + comprimento) ≤ 200 cm**."
+    "Regras:\n\n * **Cada lado ≤ 100 cm** \n\n * **Soma (altura + largura + comprimento) ≤ 200 cm**."
 )
 
 col4, col5, col6 = st.columns(3)
