@@ -96,7 +96,7 @@ st.markdown("---")
 # ---- Seção 2: Mercado Livre (Leve) ----
 st.subheader("Mercado Livre (Leve)")
 st.markdown(
-    "Regras: \n\n** * Cada lado ≤ 100 cm** \n\n ** * Soma (altura + largura + comprimento) ≤ 200 cm**."
+    "Regras: \n\n * **Cada lado ≤ 100 cm** \n\n * **Soma (altura + largura + comprimento) ≤ 200 cm**."
 )
 
 col4, col5, col6 = st.columns(3)
