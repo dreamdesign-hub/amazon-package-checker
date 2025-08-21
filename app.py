@@ -68,7 +68,7 @@ def evaluate_ml(a, b, c):
 st.title("Teste de Dimensões — Amazon & Mercado Livre")
 
 st.markdown(
-    "**Amazon**: informe 3 medidas em cm (qualquer ordem).\n\n. Regras: \n\n * **total ≤ 432** \n\n * **maior lado ≤ 180**."
+    "**Amazon**: informe 3 medidas em cm (qualquer ordem).\n\nRegras: \n\n * **Total ≤ 432** \n\n * **Maior lado ≤ 180**."
 )
 
 # ---- Seção 1: Amazon ----
@@ -96,7 +96,7 @@ st.markdown("---")
 # ---- Seção 2: Mercado Livre (Leve) ----
 st.subheader("Mercado Livre (Leve)")
 st.markdown(
-    "Regras: \n\n**cada lado ≤ 100 cm** e **soma (altura + largura + comprimento) ≤ 200 cm**."
+    "Regras: \n\n**Cada lado ≤ 100 cm** \n\n **soma (altura + largura + comprimento) ≤ 200 cm**."
 )
 
 col4, col5, col6 = st.columns(3)
