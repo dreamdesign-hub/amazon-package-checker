@@ -1,5 +1,3 @@
-
-import re
 import streamlit as st
 
 # ===== CONFIGURAÇÃO =====
@@ -9,61 +7,85 @@ st.set_page_config(
     layout="centered",
 )
 
-# Força o modo claro (neutraliza o tema do navegador)
+# ===== ESTILO VISUAL =====
 st.markdown(
     """
     <style>
+    /* ===== Fundo e texto geral ===== */
     [data-testid="stAppViewContainer"] > .main {
-        background-color: #f9fafb; /* fundo cinza-claro */
-        color: #111827 !important; /* texto escuro */
+        background-color: #f2f2f2; /* fundo neutro mais claro */
+        color: #111111 !important;
     }
 
-    /* inputs */
-    .stTextInput>div>div>input {
-        background-color: #ffffff !important;
-        color: #111827 !important;
-        border: 1px solid #d1d5db !important;
-    }
-
-    /* títulos e textos */
+    /* ===== Textos gerais ===== */
     h1, h2, h3, h4, h5, h6, p, label, span {
-        color: #111827 !important; /* texto quase preto */
+        color: #111111 !important;
     }
 
-    /* caixas de regras */
+    /* ===== Hierarquia de fontes ===== */
+    h1 {
+        font-size: 2.3rem !important; /* título principal */
+        font-weight: 800 !important;
+    }
+
+    .section-title {
+        font-size: 2rem !important; /* Amazon, Correios, Mercado Livre */
+        font-weight: 700 !important;
+        margin-top: 30px;
+        margin-bottom: 6px;
+    }
+
+    p, label, span {
+        font-size: 1.1rem !important;
+    }
+
+    /* ===== Caixa de regras ===== */
     .rule-block {
         background: #ffffff;
-        border-left: 4px solid #e5e7eb;
-        padding: 10px 14px;
+        border-left: 4px solid #d1d5db;
+        padding: 12px 16px;
         border-radius: 8px;
-        margin-bottom: 12px;
-        color: #111827 !important;
+        margin-bottom: 14px;
+        color: #111111 !important;
     }
 
-    /* botões */
+    /* ===== Campos de entrada ===== */
+    .stTextInput>div>div>input {
+        background-color: #ffffff !important;
+        color: #111111 !important;
+        border: 1px solid #b0b0b0 !important;
+        font-size: 1.1rem !important;
+        padding: 8px !important;
+    }
+
+    /* ===== Botões ===== */
     .stButton>button {
-        background-color: #2563eb;
-        color: white !important;
-        border: none;
+        background-color: #e0e0e0 !important; /* cinza claro */
+        color: #111111 !important; /* texto preto */
+        border: 1px solid #b0b0b0 !important;
         border-radius: 8px;
-        padding: 8px 14px;
-        font-weight: 600;
+        padding: 10px 18px !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
         cursor: pointer;
+        transition: all 0.2s ease-in-out;
     }
 
     .stButton>button:hover {
-        background-color: #1e40af;
+        background-color: #cccccc !important;
+        border-color: #999999 !important;
     }
 
-    /* títulos de seção */
-    .section-title {
-        font-weight: 700;
-        margin-bottom: 6px;
+    /* ===== Ajuste de espaçamento geral ===== */
+    .block-container {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
+
 
 
 # ===== util =====
