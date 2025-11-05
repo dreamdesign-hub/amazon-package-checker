@@ -87,7 +87,7 @@ st.markdown("---")
 
 # ---- Seção Correios ----
 st.subheader("Correios")
-st.markdown("Regras: **cada lado ≤ 100 cm**, **soma (altura + largura + comprimento) ≤ 200 cm**.")
+st.markdown("Regras: **\ncada lado ≤ 100 cm**, **\nsoma (altura + largura + comprimento) ≤ 200 cm**.")
 
 col4, col5, col6 = st.columns(3)
 with col4:
