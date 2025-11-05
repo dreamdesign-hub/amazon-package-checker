@@ -189,31 +189,53 @@ if st.button("Verificar Correios", key="btn_cor"):
 
 st.markdown("---")
 
-# --- Mercado Livre (cor amarelo) ---
-st.markdown('<div class="section-title" style="color:#f7c600">Mercado Livre</div>', unsafe_allow_html=True)
-st.markdown(
-    '<div class="rule-block"><ul style="margin:0;padding-left:18px"><li>Cada lado ≤ <b>200 cm</b></li>'
-    '<li>Soma total (altura + largura + comprimento) ≤ <b>300 cm</b></li>'
-    '<li>Peso máximo ≤ <b>50 kg</b></li></ul></div>',
-    unsafe_allow_html=True,
-)
+# ===== MERCADO LIVRE =====
+st.markdown("<h2 class='section-title' style='color:#ffcc00;'>📦 Mercado Livre</h2>", unsafe_allow_html=True)
 
-col_m1, col_m2, col_m3, col_m4 = st.columns([1,1,1,1])
-with col_m1:
-    ml1 = st.text_input("Altura (cm) - ML", value="", key="ml_m1")
-with col_m2:
-    ml2 = st.text_input("Largura (cm) - ML", value="", key="ml_m2")
-with col_m3:
-    ml3 = st.text_input("Comprimento (cm) - ML", value="", key="ml_m3")
-with col_m4:
-    peso = st.text_input("Peso (kg) - ML", value="", key="ml_wt")
+st.markdown("""
+<div class='rule-block'>
+<ul>
+<li>Cada lado ≤ <b>200 cm</b></li>
+<li>Soma total (altura + largura + comprimento) ≤ <b>300 cm</b></li>
+<li>Peso máximo ≤ <b>50 kg</b></li>
+</ul>
+</div>
+""", unsafe_allow_html=True)
 
-if st.button("Verificar Mercado Livre", key="btn_ml"):
-    try:
-        res = evaluate_ml(ml1, ml2, ml3, peso)
-        if res["status"] == "Aceita":
-            st.success("✅ Aceita — dentro dos limites")
+# Cria 4 colunas de tamanhos iguais e alinhadas
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+    ml_altura = st.text_input("Altura (cm) - ML", key="ml_altura")
+
+with col2:
+    ml_largura = st.text_input("Largura (cm) - ML", key="ml_largura")
+
+with col3:
+    ml_comprimento = st.text_input("Comprimento (cm) - ML", key="ml_comprimento")
+
+with col4:
+    ml_peso = st.text_input("Peso (kg) - ML", key="ml_peso")
+
+if st.button("Verificar Mercado Livre"):
+    if ml_altura and ml_largura and ml_comprimento and ml_peso:
+        altura = float(ml_altura)
+        largura = float(ml_largura)
+        comprimento = float(ml_comprimento)
+        peso = float(ml_peso)
+        soma = altura + largura + comprimento
+
+        if altura <= 200 and largura <= 200 and comprimento <= 200 and soma <= 300 and peso <= 50:
+            st.success("✅ Aprovado — dentro dos limites do Mercado Livre.")
         else:
-            st.error(f"❌ {res['motivo']}")
-    except Exception:
-        st.error("Entrada inválida. Preencha as medidas e o peso corretamente.")
+            motivos = []
+            if altura > 200 or largura > 200 or comprimento > 200:
+                motivos.append("Algum lado excede 200 cm.")
+            if soma > 300:
+                motivos.append("A soma das dimensões ultrapassa 300 cm.")
+            if peso > 50:
+                motivos.append("O peso excede 50 kg.")
+            st.error("❌ Reprovado — " + " ".join(motivos))
+    else:
+        st.warning("Por favor, preencha todas as medidas e o peso.")
+
