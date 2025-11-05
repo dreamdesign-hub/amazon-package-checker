@@ -134,4 +134,67 @@ with col3: a3 = st.text_input("Medida 3 (cm)", "")
 if st.button("Verificar Amazon"):
     try:
         A, B, C = normalize_dims([a1, a2, a3])
-        res = evaluate_amaz_
+        res = evaluate_amazon(A, B, C)
+        if res["status"] == "Aceita":
+            st.success(f"✅ Aceita — total {res['total']:.2f} cm")
+        else:
+            st.error(f"❌ {res['motivo']}")
+    except Exception:
+        st.error("Entrada inválida. Preencha corretamente.")
+
+st.markdown("---")
+
+# ===== CORREIOS =====
+st.markdown("<h3 class='correios-title'>📮 Correios</h3>", unsafe_allow_html=True)
+st.markdown("""
+<div class="rules">
+<ul>
+<li>Cada lado ≤ <b>100 cm</b></li>
+<li>Soma (altura + largura + comprimento) ≤ <b>200 cm</b></li>
+</ul>
+</div>
+""", unsafe_allow_html=True)
+
+c1, c2, c3 = st.columns(3)
+with c1: co1 = st.text_input("Altura (cm)", "")
+with c2: co2 = st.text_input("Largura (cm)", "")
+with c3: co3 = st.text_input("Comprimento (cm)", "")
+if st.button("Verificar Correios"):
+    try:
+        r = evaluate_correios(co1, co2, co3)
+        if r["status"] == "Aceita":
+            st.success(f"✅ Aceita — soma {r['soma']:.2f} cm")
+        else:
+            st.error(f"❌ {r['motivo']}")
+    except Exception:
+        st.error("Entrada inválida. Preencha corretamente.")
+
+st.markdown("---")
+
+# ===== MERCADO LIVRE =====
+st.markdown("<h3 class='ml-title'>🟡 Mercado Livre</h3>", unsafe_allow_html=True)
+st.markdown("""
+<div class="rules">
+<ul>
+<li>Cada lado ≤ <b>200 cm</b></li>
+<li>Soma total (altura + largura + comprimento) ≤ <b>300 cm</b></li>
+<li>Peso máximo: <b>50 kg</b></li>
+</ul>
+</div>
+""", unsafe_allow_html=True)
+
+m1, m2, m3 = st.columns(3)
+with m1: ml1 = st.text_input("Altura (cm)", "")
+with m2: ml2 = st.text_input("Largura (cm)", "")
+with m3: ml3 = st.text_input("Comprimento (cm)", "")
+peso = st.text_input("Peso (kg)", "")
+
+if st.button("Verificar Mercado Livre"):
+    try:
+        r = evaluate_ml(ml1, ml2, ml3, peso)
+        if r["status"] == "Aceita":
+            st.success("✅ Aceita — dentro dos limites")
+        else:
+            st.error(f"❌ {r['motivo']}")
+    except Exception:
+        st.error("Entrada inválida. Preencha corretamente.")
