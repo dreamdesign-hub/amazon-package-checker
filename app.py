@@ -1,57 +1,67 @@
-# app.py — corrigido: keys únicas + CSS mais seguro
 import re
 import streamlit as st
 
+# ===== CONFIGURAÇÃO =====
 st.set_page_config(
     page_title="Teste de Dimensões — Amazon, Correios & Mercado Livre",
     page_icon="📦",
     layout="centered",
 )
 
-# ===== CSS leve e seguro (seletores mais específicos) =====
+# Força o modo claro (neutraliza o tema do navegador)
 st.markdown(
     """
-<style>
-/* fundo neutro */
-[data-testid="stAppViewContainer"] > .main {
-    background-color: #f4f4f4;
-}
+    <style>
+    [data-testid="stAppViewContainer"] > .main {
+        background-color: #f9fafb; /* fundo cinza-claro */
+        color: #111827 !important; /* texto escuro */
+    }
 
-/* inputs com fundo branco */
-.stTextInput>div>div>input {
-    background-color: #ffffff !important;
-    color: #000000 !important;
-}
+    /* inputs */
+    .stTextInput>div>div>input {
+        background-color: #ffffff !important;
+        color: #111827 !important;
+        border: 1px solid #d1d5db !important;
+    }
 
-/* título mais escuro */
-h1 {
-    color: #1f2937 !important;
-}
+    /* títulos e textos */
+    h1, h2, h3, h4, h5, h6, p, label, span {
+        color: #111827 !important; /* texto quase preto */
+    }
 
-/* estilo dos blocos de regras */
-.rule-block {
-    background: #ffffff;
-    border-left: 4px solid #e6e9ee;
-    padding: 10px 14px;
-    border-radius: 6px;
-    margin-bottom: 12px;
-}
+    /* caixas de regras */
+    .rule-block {
+        background: #ffffff;
+        border-left: 4px solid #e5e7eb;
+        padding: 10px 14px;
+        border-radius: 8px;
+        margin-bottom: 12px;
+        color: #111827 !important;
+    }
 
-/* botões primários com borda arredondada */
-.stButton>button {
-    border-radius: 8px;
-    padding: 8px 14px;
-    font-weight: 600;
-}
+    /* botões */
+    .stButton>button {
+        background-color: #2563eb;
+        color: white !important;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 14px;
+        font-weight: 600;
+        cursor: pointer;
+    }
 
-/* small helpers */
-.section-title {
-    font-weight: 700;
-    margin-bottom: 6px;
-}
-</style>
-""",
-    unsafe_allow_html=True,
+    .stButton>button:hover {
+        background-color: #1e40af;
+    }
+
+    /* títulos de seção */
+    .section-title {
+        font-weight: 700;
+        margin-bottom: 6px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
 )
 
 # ===== util =====
