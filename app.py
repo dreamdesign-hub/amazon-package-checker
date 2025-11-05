@@ -63,7 +63,7 @@ st.title("Teste de Dimensões — Amazon, Correios & Mercado Livre")
 
 # ---- Seção Amazon ----
 st.subheader("Amazon")
-st.markdown("**Regras:**   \n Maior Lado + 2 × (largura + altura) ≤ 432 cm.    \n   Maior lado ≤ 180 cm.")
+st.markdown("**Regras:**   \n - Maior Lado + 2 × (largura + altura) ≤ 432 cm.    \n   - Maior lado ≤ 180 cm.")
 
 col1, col2, col3 = st.columns(3)
 with col1:
@@ -87,7 +87,7 @@ st.markdown("---")
 
 # ---- Seção Correios ----
 st.subheader("Correios")
-st.markdown("**Regras:**  \n Cada lado ≤ 100 cm.     \n     Soma (altura + largura + comprimento) ≤ 200 cm.")
+st.markdown("**Regras:**  \n - Cada lado ≤ 100 cm.     \n     - Soma (altura + largura + comprimento) ≤ 200 cm.")
 
 col4, col5, col6 = st.columns(3)
 with col4:
@@ -111,7 +111,7 @@ st.markdown("---")
 
 # ---- Seção Mercado Livre ----
 st.subheader("Mercado Livre")
-st.markdown("**Regras:**  \n  Cada lado ≤ 200 cm.  \n  Soma (altura + largura + comprimento) ≤ 300 cm.   \n  Peso ≤ 50 kg.")
+st.markdown("**Regras:**  \n  - Cada lado ≤ 200 cm.  \n  - Soma (altura + largura + comprimento) ≤ 300 cm.   \n  - Peso ≤ 50 kg.")
 
 col7, col8, col9, col10 = st.columns(4)
 with col7:
