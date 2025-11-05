@@ -202,13 +202,13 @@ st.markdown(
 
 col_m1, col_m2, col_m3, col_m4 = st.columns([1,1,1,1])
 with col_m1:
-    ml1 = st.text_input("Altura (cm) - ML", value="", key="ml_m1")
+    ml1 = st.text_input("Altura (cm)", value="", key="ml_m1")
 with col_m2:
-    ml2 = st.text_input("Largura (cm) - ML", value="", key="ml_m2")
+    ml2 = st.text_input("Largura (cm)", value="", key="ml_m2")
 with col_m3:
-    ml3 = st.text_input("Comprimento (cm) - ML", value="", key="ml_m3")
+    ml3 = st.text_input("Comprimento (cm)", value="", key="ml_m3")
 with col_m4:
-    peso = st.text_input("Peso (kg) - ML", value="", key="ml_wt")
+    peso = st.text_input("Peso (kg)", value="", key="ml_wt")
 
 if st.button("Verificar Mercado Livre", key="btn_ml"):
     try:
